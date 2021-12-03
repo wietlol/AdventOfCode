@@ -1,0 +1,36 @@
+package me.wietlol.adventofcode.y2021
+
+import org.junit.Test
+
+class Day1
+{
+	@Test
+	fun task1()
+	{
+		javaClass.getResourceAsStream("day1.txt")
+			.reader()
+			.readLines()
+			.asSequence()
+			.map { it.toInt() }
+			.windowed(2)
+			.filter { (left, right) -> left < right }
+			.count()
+			.also { println(it) }
+	}
+	
+	@Test
+	fun task2()
+	{
+		javaClass.getResourceAsStream("day1.txt")
+			.reader()
+			.readLines()
+			.asSequence()
+			.map { it.toInt() }
+			.windowed(3)
+			.map { it.sum() }
+			.windowed(2)
+			.filter { (left, right) -> left < right }
+			.count()
+			.also { println(it) }
+	}
+}
