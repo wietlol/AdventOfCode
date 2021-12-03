@@ -37,7 +37,45 @@ class Day3
 	@Test
 	fun task2()
 	{
+		val input = javaClass.getResourceAsStream("day3.txt")!!
+			.reader()
+			.readLines()
+		
+		val oxygenRating = computeOxygenRating(input)
+		val co2ScrubberRating = computeCo2ScrubberRating(input)
+		println(oxygenRating)
+		println(co2ScrubberRating)
+		println(oxygenRating * co2ScrubberRating)
+	}
 	
+	private fun computeOxygenRating(input: List<String>, index: Int = 0): Int
+	{
+		if (input.size == 1)
+			return input.single().toInt(2)
+		
+		val group = input.groupBy { it[index] }
+		val zeroes = group['0']?.toList() ?: emptyList()
+		val ones = group['1']?.toList() ?: emptyList()
+		
+		return if (zeroes.size > ones.size)
+			computeOxygenRating(zeroes, index + 1)
+		else
+			computeOxygenRating(ones, index + 1)
+	}
+	
+	private fun computeCo2ScrubberRating(input: List<String>, index: Int = 0): Int
+	{
+		if (input.size == 1)
+			return input.single().toInt(2)
+		
+		val group = input.groupBy { it[index] }
+		val zeroes = group['0']?.toList() ?: emptyList()
+		val ones = group['1']?.toList() ?: emptyList()
+		
+		return if (zeroes.size <= ones.size)
+			computeCo2ScrubberRating(zeroes, index + 1)
+		else
+			computeCo2ScrubberRating(ones, index + 1)
 	}
 	
 	data class Output(
@@ -46,5 +84,13 @@ class Day3
 	)
 	{
 		val consumption get() = gammaRate * epsilonRate
+	}
+	
+	data class Output2(
+		val oxygenRating: Int,
+		val co2ScrubberRating: Int,
+	)
+	{
+		val lifeSupportRating get() = oxygenRating * co2ScrubberRating
 	}
 }
