@@ -1,5 +1,6 @@
 package me.wietlol.adventofcode.y2021
 
+import me.wietlol.adventofcode.readInput
 import org.junit.Test
 
 class Day2
@@ -7,8 +8,7 @@ class Day2
 	@Test
 	fun task1()
 	{
-		javaClass.getResourceAsStream("day2.txt")
-			.reader()
+		readInput()
 			.readLines()
 			.map { it.split(" ") }
 			.fold(Position(0, 0)) { position, (command, weight) ->
@@ -27,8 +27,7 @@ class Day2
 	@Test
 	fun task2()
 	{
-		javaClass.getResourceAsStream("day2.txt")
-			.reader()
+		readInput()
 			.readLines()
 			.map { it.split(" ") }
 			.fold(Orientation(0, 0, 0)) { position, (command, weight) ->

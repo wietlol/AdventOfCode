@@ -1,9 +1,21 @@
 package me.wietlol.adventofcode.y2015
 
 import org.junit.Test
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
 
 class Day9
 {
+	@OptIn(ExperimentalTime::class)
+	@Test
+	fun performance()
+	{
+		task1()
+		task2()
+		measureTime { task1() }.also { println("task1 completed in $it") }
+		measureTime { task2() }.also { println("task2 completed in $it") }
+	}
+	
 	@Test
 	fun task1()
 	{

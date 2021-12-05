@@ -1,5 +1,6 @@
 package me.wietlol.adventofcode.y2015
 
+import me.wietlol.adventofcode.readInput
 import org.junit.Test
 import kotlin.math.max
 
@@ -8,8 +9,7 @@ class Day2
 	@Test
 	fun task1()
 	{
-		javaClass.getResourceAsStream("day2.txt")!!
-			.reader()
+		readInput()
 			.readLines()
 			.map { Present.parse(it) }
 			.sumOf { it.wrapping }
@@ -19,8 +19,7 @@ class Day2
 	@Test
 	fun task2()
 	{
-		javaClass.getResourceAsStream("day2.txt")!!
-			.reader()
+		readInput()
 			.readLines()
 			.map { Present.parse(it) }
 			.sumOf { it.ribbon }

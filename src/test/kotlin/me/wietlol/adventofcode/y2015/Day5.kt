@@ -1,5 +1,6 @@
 package me.wietlol.adventofcode.y2015
 
+import me.wietlol.adventofcode.readInput
 import org.junit.Test
 
 class Day5
@@ -7,8 +8,7 @@ class Day5
 	@Test
 	fun task1()
 	{
-		javaClass.getResourceAsStream("day5.txt")!!
-			.reader()
+		readInput()
 			.readLines()
 			.filter { it.matches(niceRegex1) }
 			.count()
@@ -18,8 +18,7 @@ class Day5
 	@Test
 	fun task2()
 	{
-		javaClass.getResourceAsStream("day5.txt")!!
-			.reader()
+		readInput()
 			.readLines()
 			.filter { it.matches(niceRegex2) }
 			.count()

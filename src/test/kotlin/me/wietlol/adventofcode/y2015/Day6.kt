@@ -1,5 +1,6 @@
 package me.wietlol.adventofcode.y2015
 
+import me.wietlol.adventofcode.readInput
 import org.junit.Test
 import java.awt.Color
 import java.awt.Dimension
@@ -21,8 +22,7 @@ class Day6
 		val ui = { _: Image -> }
 		
 		val lights = Array(totalSize) { BooleanArray(totalSize) }
-		javaClass.getResourceAsStream("day6.txt")!!
-			.reader()
+		readInput()
 			.readLines()
 			.map { Operation.parse(it) }
 			.forEach {
@@ -41,8 +41,7 @@ class Day6
 		val ui = { _: Image -> }
 		
 		val lights = Array(totalSize) { IntArray(totalSize) }
-		javaClass.getResourceAsStream("day6.txt")!!
-			.reader()
+		readInput()
 			.readLines()
 			.map { Operation.parse(it) }
 			.forEach {

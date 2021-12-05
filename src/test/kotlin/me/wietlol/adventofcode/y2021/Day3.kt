@@ -8,8 +8,7 @@ class Day3
 	@Test
 	fun task1()
 	{
-		javaClass.getResourceAsStream("day3.txt")!!
-			.reader()
+		readInput()
 			.readLines()
 			.let { it.fold(IntArray(it.first().length), ::merge) }
 			.let { generateOutput(it) }
@@ -38,8 +37,7 @@ class Day3
 	@Test
 	fun task2()
 	{
-		val input = javaClass.getResourceAsStream("day3.txt")!!
-			.reader()
+		val input = readInput()
 			.readLines()
 		
 		val oxygenRating = computeOxygenRating(input)

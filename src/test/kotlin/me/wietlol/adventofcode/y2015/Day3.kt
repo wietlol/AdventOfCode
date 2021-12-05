@@ -1,5 +1,6 @@
 package me.wietlol.adventofcode.y2015
 
+import me.wietlol.adventofcode.readInput
 import org.junit.Test
 
 class Day3
@@ -12,8 +13,7 @@ class Day3
 		val visit = { location: Location -> deliveredPresents.compute(location) { _, value -> (value ?: 0) + 1 } }
 		visit(Location(0, 0))
 		
-		javaClass.getResourceAsStream("day3.txt")!!
-			.reader()
+		readInput()
 			.readText()
 			.trim()
 			.fold(Location(0, 0)) { location, direction ->
@@ -31,8 +31,7 @@ class Day3
 		val visit = { location: Location -> deliveredPresents.compute(location) { _, value -> (value ?: 0) + 1 } }
 		visit(Location(0, 0))
 		
-		javaClass.getResourceAsStream("day3.txt")!!
-			.reader()
+		readInput()
 			.readText()
 			.trim()
 			.foldIndexed(Location(0, 0).let { Pair(it, it) }) { index, location, direction ->
