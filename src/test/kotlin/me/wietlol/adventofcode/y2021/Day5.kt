@@ -9,16 +9,9 @@ class Day5
 	@Test
 	fun task1()
 	{
-		val board = readInput()
-			.readLines()
-			.map { Pipe.parse(it) }
-			.filter { it.isStraight() }
-			.let { Board.fromPipes(it) }
-		
-		val howMany = board
-			.points()
-			.filter { it > 1 }
-			.count()
+		val howMany = readInput()
+			.eval("&(x1','y1' -> 'x2','y2)->{|_}->[*..]->[1k,1k]->*..->{>1}->#")
+			.compute()
 		
 		assertEquals(7269, howMany)
 	}
@@ -26,18 +19,23 @@ class Day5
 	@Test
 	fun task2()
 	{
-		val board = readInput()
-			.readLines()
-			.map { Pipe.parse(it) }
-			.let { Board.fromPipes(it) }
-		
-		val howMany = board
-			.points()
-			.filter { it > 1 }
-			.count()
+		val howMany = readInput()
+			.eval("&(x1','y1' -> 'x2','y2)->[*..]->[1k,1k]->*..->{>1}->#")
+			.compute()
 		
 		assertEquals(21140, howMany)
 	}
+	
+	fun java.io.Reader.eval(absoluteGibberish: String): Board =
+		readLines()
+			.map { Pipe.parse(it) }
+			.let { if (absoluteGibberish.contains("{|_}")) it.filter { it.isStraight() } else it }
+			.let { Board.fromPipes(it) }
+	
+	fun Board.compute(): Int =
+		points()
+			.filter { it > 1 }
+			.count()
 	
 	data class Point(
 		val x: Int,
@@ -60,7 +58,7 @@ class Day5
 			val y = if (y1 == y2) generateSequence { y1 } else if (y1 > y2) (y1 downTo y2).asSequence() else (y1..y2).asSequence()
 			
 			val xy = x.zip(y).map { (x, y) -> Point(x, y) }
-
+			
 			return xy
 		}
 		
