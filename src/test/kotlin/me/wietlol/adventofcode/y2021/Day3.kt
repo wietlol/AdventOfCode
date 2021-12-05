@@ -1,5 +1,6 @@
 package me.wietlol.adventofcode.y2021
 
+import me.wietlol.adventofcode.readInput
 import org.junit.Test
 
 class Day3
