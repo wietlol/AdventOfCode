@@ -29,7 +29,6 @@ class Day15
 	// expected N: 250000
 	// actual N:   654515
 	// ratio N:    261%
-	@OptIn(ExperimentalTime::class)
 	@Test
 	fun task2()
 	{
@@ -37,38 +36,37 @@ class Day15
 			.readLines()
 			.map { it.toCharArray().map { it.toString().toInt() }.toIntArray() }
 			.toTypedArray()
-			.unfold()
+			.unfold(5)
 		
 		val shortestDistance = findShortestPath(distanceMap)
 		
 		assertEquals(2809, shortestDistance)
 	}
 	
-	private fun Array<IntArray>.unfold(): Array<IntArray>
+	private fun Array<IntArray>.unfold(times: Int): Array<IntArray>
 	{
-		val rows: List<IntArray> = map { row ->
-			row +
-				row.map { it.i() } +
-				row.map { it.i().i() } +
-				row.map { it.i().i().i() } +
-				row.map { it.i().i().i().i() }
+		val rows: List<List<Int>> = map { row ->
+			(0 until times)
+				.flatMap { t -> row.map { it.i(t) } }
 		}
 		
-		val fullMap = rows +
-			rows.map { it.map { it.i() }.toIntArray() } +
-			rows.map { it.map { it.i().i() }.toIntArray() } +
-			rows.map { it.map { it.i().i().i() }.toIntArray() } +
-			rows.map { it.map { it.i().i().i().i() }.toIntArray() }
+		val fullMap = (0 until times)
+			.flatMap { t ->
+				rows.map { it.map { it.i(t) }.toIntArray() }
+			}
 		
 		return fullMap
 			.toTypedArray()
 	}
 	
-	private fun Int.i(): Int =
-		if (this == 9)
-			1
-		else
-			plus(1)
+	private fun Int.i(times: Int): Int =
+		plus(times)
+			.let {
+				var a = it
+				while (a > 9)
+					a -= 9
+				a
+			}
 	
 	private fun findShortestPath(distanceMap: Array<IntArray>): Int
 	{
