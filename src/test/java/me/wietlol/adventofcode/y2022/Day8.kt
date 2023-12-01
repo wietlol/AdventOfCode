@@ -6,8 +6,6 @@ import org.junit.Test
 import unittest.core.models.TestCase
 import unittest.core.models.TestModule
 import java.io.InputStreamReader
-import kotlin.streams.asStream
-import kotlin.streams.toList
 
 /**
  * Class containing the solution for the puzzle of day 8 from year 2022 of Advent of Code.
@@ -439,40 +437,6 @@ class ForestWalker
 			}
 			.toList()
 	}
-}
-
-/**
- * Represents a value parser interface.
- *
- * @param T the type of the value to parse.
- *
- * @author  Wietlol
- * @since   1.0
- */
-interface ValueParser<T>
-{
-	/**
-	 * Parses the given character and returns the parsed value.
-	 *
-	 * @param char the character to be parsed
-	 * @return the parsed value
-	 *
-	 * @author  Wietlol
-	 * @since   1.0
-	 */
-	fun parseValue(char: Char): T =
-		parseValue(char.toString())
-	
-	/**
-	 * Parses the given text and returns the parsed value.
-	 *
-	 * @param text The text to be parsed.
-	 * @return The parsed value.
-	 *
-	 * @author  Wietlol
-	 * @since   1.0
-	 */
-	fun parseValue(text: String): T
 }
 
 /**
